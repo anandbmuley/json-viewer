@@ -1,0 +1,7 @@
+version: '3'
+services:
+  json-viewer:
+    container_name: json-viewer-app
+    image: anandbmuley/json-viewer:latest
+    ports:
+    - 5001:80
