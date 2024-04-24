@@ -1,0 +1,22 @@
+{
+    "name": "John Doe",
+    "age": 30,
+    "is_student": false,
+"address": {
+        "street": "123 Main St",
+        "city": "Anytown",
+        "country": "USA"
+    },
+"emails": [
+        "john.doe@example.com",
+        "johndoe@gmail.com"
+    ],
+    "grades": {
+        "math": 85,
+        "science": 90,
+        "history": 75
+    },"languages": [
+        "English",
+        "Spanish"
+    ],"interests": null
+}
