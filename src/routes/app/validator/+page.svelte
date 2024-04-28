@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import JsonSchemaInput from '../../components/JsonSchemaInput.svelte';
-	import UserJsonInput from '../../components/UserJsonInput.svelte';
+	import JsonSchemaInput from '../../../components/JsonSchemaInput.svelte';
+	import UserJsonInput from '../../../components/UserJsonInput.svelte';
 
 	import Ajv from 'ajv';
 	const ajv = new Ajv();
