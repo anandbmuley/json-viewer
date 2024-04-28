@@ -11,7 +11,7 @@
 
 	const clearMessage = () => {
 		alert = {
-			mesage: 'JSON saved successfully',
+			mesage: '',
 			status: 'success'
 		};
 	};
