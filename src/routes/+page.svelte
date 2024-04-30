@@ -1,3 +1,7 @@
+<script lang="ts">
+	import { onMount } from 'svelte';
+</script>
+
 <div class="container page-center">
 	<h1 class="display-1">JSON Viewer</h1>
 	<h2>Introduction</h2>
@@ -29,10 +33,5 @@
 	}
 	p {
 		font-size: 1.2rem;
-	}
-	.green-btn {
-		background-color: #39ff14;
-		border-color: #39ff14;
-		color: black;
 	}
 </style>

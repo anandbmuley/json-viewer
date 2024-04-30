@@ -1,9 +1,8 @@
 <script>
-	import { onMount } from 'svelte';
 	import ExistingJsonSearch from '../../components/functional/ExistingJsonSearch.svelte';
 </script>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="/">JSON Viewer</a>
 		<button
@@ -20,14 +19,20 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<li class="nav-item">
-					<a class="nav-link" href="/app/viewer">Viewer</a>
+					<a class="nav-link" href="/app">Viewer</a>
 				</li>
-				<!-- <li class="nav-item">
-					<a class="nav-link" href="/validator">Validator</a>
-				</li> -->
+				<li class="nav-item">
+					<a class="nav-link" href="/app/validator">Validator</a>
+				</li>
 				<ExistingJsonSearch />
 			</ul>
 		</div>
 	</div>
 </nav>
 <slot />
+
+<style>
+	a {
+		color: white;
+	}
+</style>

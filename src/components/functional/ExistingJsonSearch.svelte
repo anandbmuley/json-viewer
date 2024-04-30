@@ -25,7 +25,7 @@
 	}
 </script>
 
-<div class="col-6 mt-1 ms-3">
+<div class="col-6 mt-1 ms-3" data-bs-theme="light">
 	<div>
 		<input
 			class="form-control form-control-sm"

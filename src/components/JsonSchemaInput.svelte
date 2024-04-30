@@ -1,39 +1,37 @@
 <!-- components/JsonSchemaInput.svelte -->
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-	import { onMount } from 'svelte';
+	let jsonSchema: string = '';
+	let isValid: boolean = true;
+	import { jsonSchemaStored, selectedSchema } from '$lib/store';
 
-	export let jsonSchema: string = '';
-	export let isValid: boolean = true;
+	$: if (jsonSchema) {
+		validateJson(jsonSchema);
+	}
 
-	const dispatch = createEventDispatcher();
-
-	// This function emits an event to send the JSON schema to the parent component
-	function sendJsonSchema() {
-		if (isValid) {
-			dispatch('jsonSchemaSubmitted', jsonSchema);
-		}
+	$: if ($selectedSchema != undefined) {
+		jsonSchema = $selectedSchema;
 	}
 
 	// This function validates if the input string is valid JSON
-	function validateJson(jsonString: string): boolean {
+	function validateJson(jsonString: string) {
 		try {
 			JSON.parse(jsonString);
-			return true;
+			$jsonSchemaStored = jsonString;
+			isValid = true;
 		} catch (error) {
-			return false;
+			isValid = false;
 		}
 	}
-
-	onMount(() => {
-		isValid = validateJson(jsonSchema);
-	});
 </script>
 
 <div>
-	<textarea bind:value={jsonSchema} placeholder="Enter JSON schema"></textarea>
+	<textarea
+		class="form-control"
+		rows="20"
+		bind:value={jsonSchema}
+		placeholder="Paste the JSON schema here..."
+	></textarea>
 	{#if !isValid}
-		<p style="color: red;">Invalid JSON schema</p>
+		<p class="text-danger">Invalid JSON schema</p>
 	{/if}
-	<button on:click={sendJsonSchema}>Submit Schema</button>
 </div>
