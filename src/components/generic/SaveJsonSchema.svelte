@@ -20,22 +20,22 @@
 		try {
 			if (jsonContent === undefined || jsonContent === '') {
 				alert = {
-					mesage: 'No content to save. Please add some content to JSON input',
+					mesage: 'No content to save. Please add some schema to save.',
 					status: 'error'
 				};
 			} else {
-				const id = await db.jsons.add({
+				await db.schemas.add({
 					title,
 					content: jsonContent
 				});
 				alert = {
-					mesage: 'JSON saved successfully',
+					mesage: 'Schema saved successfully',
 					status: 'success'
 				};
 			}
 		} catch (err) {
 			alert = {
-				mesage: `Could not save the JSON: ${err}`,
+				mesage: `Could not save the schema: ${err}`,
 				status: 'error'
 			};
 		}
@@ -50,7 +50,7 @@
 	data-bs-target="#exampleModal"
 	on:click={clearMessage}
 >
-	SAVE
+	Save schema
 </button>
 <!-- Modal -->
 <div
@@ -64,7 +64,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<div>
-					<h1 class="modal-title fs-3" id="exampleModalLabel">Save JSON</h1>
+					<h1 class="modal-title fs-3" id="exampleModalLabel">Save schema</h1>
 				</div>
 			</div>
 			<div class="modal-body">
@@ -74,7 +74,7 @@
 						class="form-control"
 						bind:value={title}
 						type="text"
-						placeholder="Enter title for this JSON..."
+						placeholder="Enter title for this schema..."
 					/>
 				</div>
 			</div>

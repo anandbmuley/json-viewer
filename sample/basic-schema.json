@@ -1,0 +1,14 @@
+{
+    "title": "Product",
+    "description": "A product in the catalog",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "Unique identifier of product",
+            "type": "integer"
+        }
+    },
+    "required": [
+        "id"
+    ]
+}

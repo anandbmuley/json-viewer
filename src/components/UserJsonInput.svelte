@@ -1,38 +1,32 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-	import { onMount } from 'svelte';
+	import { jsonInputStored } from '$lib/store';
 
 	export let jsonInput: string = '';
 	export let isValid: boolean = true;
 
-	const dispatch = createEventDispatcher();
-
-	// This function emits an event to send the JSON input to the parent component
-	function sendJsonInput() {
-		if (isValid) {
-			dispatch('jsonInputSubmitted', jsonInput);
-		}
+	$: if (jsonInput) {
+		validateJson(jsonInput);
 	}
 
-	// This function validates if the input string is valid JSON
-	function validateJson(jsonString: string): boolean {
+	function validateJson(jsonString: string) {
 		try {
 			JSON.parse(jsonString);
-			return true;
+			$jsonInputStored = jsonString;
+			isValid = true;
 		} catch (error) {
-			return false;
+			isValid = false;
 		}
 	}
-
-	onMount(() => {
-		isValid = validateJson(jsonInput);
-	});
 </script>
 
 <div>
-	<textarea bind:value={jsonInput} placeholder="Enter JSON input"></textarea>
+	<textarea
+		class="form-control"
+		rows="20"
+		bind:value={jsonInput}
+		placeholder="Paste a JSON string to validate..."
+	></textarea>
 	{#if !isValid}
-		<p style="color: red;">Invalid JSON input</p>
+		<p class="text-danger">Invalid JSON input</p>
 	{/if}
-	<button on:click={sendJsonInput}>Submit Input</button>
 </div>
