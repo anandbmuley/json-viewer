@@ -27,7 +27,7 @@
 <div>
 	<textarea
 		class="form-control"
-		rows="20"
+		rows="24"
 		bind:value={jsonSchema}
 		placeholder="Paste the JSON schema here..."
 	></textarea>
@@ -35,3 +35,10 @@
 		<p class="text-danger">Invalid JSON schema</p>
 	{/if}
 </div>
+
+<style>
+	textarea {
+		font-size: 0.9rem;
+		font-family: 'PT Mono';
+	}
+</style>

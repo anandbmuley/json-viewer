@@ -60,10 +60,9 @@
 </script>
 
 <div class="container mt-3">
-	<h3>Validator</h3>
-	<div class="row mb-3">
+	<div class="row">
 		<div class="col-2">
-			<SaveJsonSchema jsonContent={$jsonSchemaStored} />
+			<h3>Validator</h3>
 		</div>
 		<div class="col-2">
 			<ExistingSchemas />
@@ -91,13 +90,19 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-4">
-			<button on:click={clearSchemaInput} class="btn btn-sm btn-danger">
-				<i class="bi bi-x-circle"></i><span class="ms-2 me-2">Clear</span>
+		<div class="col-3">
+			<button on:click={clearSchemaInput} class="btn btn-sm btn-outline-dark">
+				<i class="bi bi-x-circle"></i><span class="ms-1">Reset</span>
 			</button>
 		</div>
 		<div class="col-4">
-			<button class="btn btn-sm btn-primary" on:click={validateJson}>Validate</button>
+			<SaveJsonSchema jsonContent={$jsonSchemaStored} />
+		</div>
+		<div class="col-3">
+			<button class="btn btn-sm btn-purple" on:click={validateJson}>
+				<i class="bi bi-check-circle-fill"></i>
+				<span class="ms-1">Validate</span>
+			</button>
 		</div>
 	</div>
 	<p class="text-danger">
@@ -113,5 +118,10 @@
 
 	.validation-path {
 		font-size: 1rem;
+	}
+	.btn-purple {
+		background-color: #9000ff;
+		border-color: #9000ff;
+		color: white;
 	}
 </style>

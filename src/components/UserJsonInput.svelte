@@ -22,7 +22,7 @@
 <div>
 	<textarea
 		class="form-control"
-		rows="20"
+		rows="24"
 		bind:value={jsonInput}
 		placeholder="Paste a JSON string to validate..."
 	></textarea>
@@ -30,3 +30,10 @@
 		<p class="text-danger">Invalid JSON input</p>
 	{/if}
 </div>
+
+<style>
+	textarea {
+		font-size: 0.9rem;
+		font-family: 'PT Mono';
+	}
+</style>

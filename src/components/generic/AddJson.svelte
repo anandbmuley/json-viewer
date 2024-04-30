@@ -50,7 +50,8 @@
 	data-bs-target="#exampleModal"
 	on:click={clearMessage}
 >
-	SAVE
+	<i class="bi bi-floppy-fill"></i>
+	<span class="ms-1">SAVE</span>
 </button>
 <!-- Modal -->
 <div
@@ -79,8 +80,10 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<button type="button" on:click={handleOnSave} class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+					>Close</button
+				>
+				<button type="button" on:click={handleOnSave} class="btn btn-purple">Save changes</button>
 			</div>
 			{#if alert.mesage}
 				<div class="m-2 alert {alert.status === 'success' ? 'alert-primary' : 'alert-danger'}">
@@ -90,3 +93,11 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	.btn-purple {
+		background-color: #9000ff;
+		border-color: #9000ff;
+		color: white;
+	}
+</style>

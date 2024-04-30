@@ -29,4 +29,4 @@
 	}
 </script>
 
-<span style={'color:' + getColorCodeByValueType(value)}>{value}</span>
+<span style="color: #9000ff">{value}</span>

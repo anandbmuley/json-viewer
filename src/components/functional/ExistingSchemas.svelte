@@ -27,21 +27,14 @@
 </script>
 
 <div>
-	<div class="autocomplete">
-		<input
-			class="form-control form-control-sm"
-			list="schemaOptions"
-			id="exampleDataList"
-			placeholder="Existing schemas..."
-			bind:value={selectedJson}
-		/>
-		<button
-			class="btn btn-sm bi bi-x-circle"
-			data-toggle="tooltip"
-			data-placement="top"
-			title="Clear selection"
-		></button>
-	</div>
+	<input
+		class="form-control form-control-sm"
+		list="schemaOptions"
+		id="exampleDataList"
+		placeholder="Existing schemas..."
+		bind:value={selectedJson}
+		type="search"
+	/>
 	<datalist id="schemaOptions">
 		{#if $existingSchemas}
 			{#each $existingSchemas as item (item.id)}
@@ -55,6 +48,5 @@
 	.autocomplete {
 		display: flex;
 		flex-direction: row;
-		align-content: space-between;
 	}
 </style>
