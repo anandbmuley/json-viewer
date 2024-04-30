@@ -22,6 +22,10 @@
 
 	function parseJSON(data: string) {
 		try {
+			alert = {
+				mesage: '',
+				status: 'success'
+			};
 			console.info('Parsing JSON', data);
 			return JSON.parse(data);
 		} catch (err) {
@@ -80,8 +84,6 @@
 	}
 	.key {
 		font-weight: 600;
-	}
-	.value {
 	}
 	.tree-view ul {
 		list-style-type: none;

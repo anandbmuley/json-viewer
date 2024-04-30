@@ -25,7 +25,7 @@
 	}
 </script>
 
-<div class="col-6 mt-1 ms-3" data-bs-theme="light">
+<div data-bs-theme="light">
 	<div>
 		<input
 			class="form-control form-control-sm"
@@ -33,6 +33,7 @@
 			id="exampleDataList"
 			placeholder="Existing jsons..."
 			bind:value={selectedJson}
+			type="search"
 		/>
 	</div>
 	<datalist id="datalistOptions">

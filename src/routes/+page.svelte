@@ -16,7 +16,7 @@
 			<p>You can save the JSON content by giving a title and refer it later.</p>
 		</li>
 	</ul>
-	<a class="btn btn-lg btn-dark" href="/app">GET STARTED</a>
+	<a class="btn btn-lg btn-purple" href="/app">GET STARTED</a>
 </div>
 
 <style>
@@ -33,5 +33,10 @@
 	}
 	p {
 		font-size: 1.2rem;
+	}
+	.btn-purple {
+		background-color: #9000ff;
+		border-color: #9000ff;
+		color: white;
 	}
 </style>
