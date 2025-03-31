@@ -16,12 +16,13 @@
 		}
 	}
 
-	$: if ($selectedJSON) {
+	$: if ($selectedJSON != undefined && $selectedJSON !== jsonData) {
 		jsonData = $selectedJSON;
 	}
 
 	const clearJsonContent = () => {
 		jsonData = '';
+		selectedJSON.set(''); // Ensure the store is cleared
 	};
 </script>
 

@@ -22,6 +22,9 @@
 		} catch (err) {
 			message = 'Invalid JSON';
 		}
+	} else {
+		jsonData = '';
+		selectedJSON.set(''); // Ensure the store is cleared to reflect in the textarea
 	}
 </script>
 
