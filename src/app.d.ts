@@ -8,6 +8,12 @@ declare global {
 		// interface PageState {}
 		// interface Platform {}
 	}
+
+	interface Window {
+		jsonpath: {
+			query: (data: any, path: string) => any[];
+		};
+	}
 }
 
 export {};

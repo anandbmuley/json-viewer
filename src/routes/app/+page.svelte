@@ -3,6 +3,7 @@
 	import AddJson from '../../components/generic/AddJson.svelte';
 	import { selectedJSON } from '$lib/store';
 	import ExistingJsonSearch from '../../components/functional/ExistingJsonSearch.svelte';
+	import EvaluateJsonPath from '../../components/functional/EvaluateJsonPath.svelte';
 
 	let jsonData: string = '';
 	let message: string = '';
@@ -28,7 +29,7 @@
 
 <div class="container mt-3">
 	<div class="row" style="height: calc(100vh - 100px);">
-		<div class="col-md-6 col-lg-4 d-flex flex-column">
+		<div class="col-md-4 d-flex flex-column">
 			<div class="row mb-2">
 				<div class="col-7">
 					<h3>Viewer</h3>
@@ -56,14 +57,17 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6 col-lg-8 d-flex flex-column">
+		<div class="col-md-4 d-flex flex-column">
 			<h3>Tree View</h3>
 			<div class="flex-grow-1 overflow-auto">
 				<TreeView bind:data={jsonData} />
 			</div>
 		</div>
+		<div class="col-md-4 d-flex flex-column">
+			<h3>Evaluate JSON Path</h3>
+			<EvaluateJsonPath bind:jsonData={jsonData} />
+		</div>
 	</div>
-	
 </div>
 
 <style>
