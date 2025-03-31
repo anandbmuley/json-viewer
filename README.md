@@ -36,3 +36,30 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+
+## Release Notes
+
+### Version 1.2.0
+
+### New Features
+
+- Added functionality to validate JSON schemas and inputs.
+- Introduced a "Tree View" for better visualization of JSON data.
+- Implemented a feature to evaluate JSON paths for quick data extraction.
+
+### Improvements
+
+- Enhanced the user interface for JSON input and schema validation.
+- Improved responsiveness and layout for better usability on different screen sizes.
+- Optimized the JSON viewer for handling larger datasets.
+
+### Fixes
+
+- Resolved an issue where the JSON schema input was not clearing properly on component load.
+- Fixed a bug causing incorrect synchronization between selected JSON and schema inputs.
+- Addressed minor UI inconsistencies in the validator and viewer components.
+
+### Miscellaneous
+
+- Updated the search functionality for existing schemas to improve accuracy.
+- Improved error messages for invalid JSON inputs to provide clearer feedback.
