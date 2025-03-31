@@ -21,6 +21,8 @@
 		jsonData = $selectedJSON;
 	}
 
+	$: jsonData = jsonData.trim();
+
 	const clearJsonContent = () => {
 		jsonData = '';
 		selectedJSON.set(''); // Ensure the store is cleared
