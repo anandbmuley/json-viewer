@@ -23,8 +23,8 @@
 		<h4>{title}</h4>
 	</div>
 	<div class="col-4">
-		<button on:click={clearJsonContent} type="button" class="btn btn-sm btn-outline-dark">
-			Clear<i class="bi bi-x-circle ms-1"></i>
+		<button on:click={clearJsonContent} type="button" class="btn btn-sm btn-purple">
+			Reset<i class="bi bi-x-circle ms-1"></i>
 		</button>
 	</div>
 </div>
@@ -45,5 +45,10 @@
 
 	h3 {
 		font-size: 1.5rem;
+	}
+	.btn-purple {
+		background-color: #9000ff;
+		border-color: #9000ff;
+		color: white;
 	}
 </style>

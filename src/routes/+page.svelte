@@ -1,95 +1,42 @@
 <script lang="ts">
-	import TreeView from '../components/TreeView.svelte';
-	import AddJson from '../components/generic/AddJson.svelte';
-	import { liveQuery } from 'dexie';
-	import { db } from '$lib/db';
-
-	let jsonData: string;
-	let message: string;
-	let selectedJson = '';
-
-	let existingJsons = liveQuery(() => db.jsons.toArray());
-
-	$: if (jsonData) {
-		try {
-			const parsed = JSON.parse(jsonData);
-			jsonData = JSON.stringify(parsed, null, 2);
-		} catch (err) {
-			message = 'Invalid JSON';
-		}
-	}
-
-	$: if (selectedJson) {
-		try {
-			const parsed = JSON.parse(selectedJson);
-			jsonData = JSON.stringify(parsed, null, 2);
-		} catch (err) {
-			message = 'Invalid JSON';
-		}
-	}
-
-	const clearJsonContent = () => {
-		jsonData = '';
-	};
+	import { onMount } from 'svelte';
 </script>
 
-<div class="container mt-3">
-	<div class="row">
-		<div class="col-5">
-			<div class="row">
-				<div class="col-4">
-					<h3>JSON Content</h3>
-				</div>
-			</div>
-			<div class="row mb-2">
-				<div class="col-3">
-					<AddJson bind:jsonContent={jsonData} />
-				</div>
-				<div class="col-6">
-					<input
-						class="form-control"
-						list="datalistOptions"
-						id="exampleDataList"
-						placeholder="Existing jsons..."
-						bind:value={selectedJson}
-					/>
-					<datalist id="datalistOptions">
-						{#if $existingJsons}
-							{#each $existingJsons as item (item.id)}
-								<option value={item.title} />
-							{/each}
-						{/if}
-					</datalist>
-				</div>
-				<div class="col-3">
-					<button on:click={clearJsonContent} type="button" class="btn btn-sm btn-outline-dark">
-						Clear<i class="bi bi-x-circle ms-1"></i>
-					</button>
-				</div>
-			</div>
-			<textarea
-				class="form-control"
-				bind:value={jsonData}
-				name="jsonData"
-				id="json-data"
-				placeholder="Paste JSON text..."
-			></textarea>
-		</div>
-		<div class="col-5">
-			<h3>Tree View</h3>
-			<TreeView bind:data={jsonData} />
-		</div>
-	</div>
+<div class="container page-center">
+	<h1 class="display-1">JSON Viewer</h1>
+	<h2>Introduction</h2>
+	<p>JSON viewer is helpful tool for working with JSON strings. Below are some of its features:</p>
+	<ul>
+		<li>
+			<b>Tree View</b>
+			<p>You can see a tree view of the JSON content in a user readable format.</p>
+		</li>
+		<li>
+			<b>Saving</b>
+			<p>You can save the JSON content by giving a title and refer it later.</p>
+		</li>
+	</ul>
+	<a class="btn btn-lg btn-purple" href="/app">GET STARTED</a>
 </div>
 
 <style>
-	textarea {
-		height: 550px;
-		font-size: 0.9rem;
-		font-family: 'PT Mono';
+	.page-center {
+		margin-left: 20%;
+		margin-top: 10%;
 	}
-
-	h3 {
-		font-size: 1.5rem;
+	h1 {
+		font-family: 'Arial Black';
+	}
+	h2,
+	p {
+		font-family: 'Arial';
+	}
+	p {
+		font-size: 1.2rem;
+	}
+	.btn-purple {
+		background-color: #9000ff;
+		border-color: #9000ff;
+		color: white;
 	}
 </style>

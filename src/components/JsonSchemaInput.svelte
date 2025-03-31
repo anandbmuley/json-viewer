@@ -1,39 +1,64 @@
 <!-- components/JsonSchemaInput.svelte -->
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
+	let jsonSchema: string = '';
+	let isValid: boolean = true;
+	import { jsonSchemaStored, selectedSchema } from '$lib/store';
 	import { onMount } from 'svelte';
 
-	export let jsonSchema: string = '';
-	export let isValid: boolean = true;
+	
 
-	const dispatch = createEventDispatcher();
+	$: if (jsonSchema) {
+		validateJson(jsonSchema);
+	}
 
-	// This function emits an event to send the JSON schema to the parent component
-	function sendJsonSchema() {
-		if (isValid) {
-			dispatch('jsonSchemaSubmitted', jsonSchema);
-		}
+	$: if ($selectedSchema != undefined) {
+		jsonSchema = $selectedSchema;
+	}
+
+	$: if ($selectedSchema !== undefined && $selectedSchema !== jsonSchema) {
+		jsonSchema = $selectedSchema; // Update the local variable when the store changes
+	}
+
+	$: if ($selectedSchema === '') {
+		jsonSchema = ''; // Clear the local variable when the store is cleared
 	}
 
 	// This function validates if the input string is valid JSON
-	function validateJson(jsonString: string): boolean {
+	function validateJson(jsonString: string) {
 		try {
 			JSON.parse(jsonString);
-			return true;
+			$jsonSchemaStored = jsonString;
+			isValid = true;
 		} catch (error) {
-			return false;
+			isValid = false;
 		}
 	}
-
-	onMount(() => {
-		isValid = validateJson(jsonSchema);
-	});
 </script>
 
-<div>
-	<textarea bind:value={jsonSchema} placeholder="Enter JSON schema"></textarea>
+<div class="json-schema-input-container">
+	<textarea
+		class="form-control"
+		bind:value={jsonSchema}
+		placeholder="Paste the JSON schema here..."
+	></textarea>
 	{#if !isValid}
-		<p style="color: red;">Invalid JSON schema</p>
+		<p class="text-danger">Invalid JSON schema</p>
 	{/if}
-	<button on:click={sendJsonSchema}>Submit Schema</button>
 </div>
+
+<style>
+	.json-schema-input-container {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+	}
+
+	textarea {
+		flex-grow: 1;
+		font-size: 0.9rem;
+		font-family: 'PT Mono';
+		resize: none;
+		overflow: auto;
+	}
+</style>
