@@ -28,7 +28,7 @@
 <div data-bs-theme="light">
 	<div>
 		<input
-			class="form-control form-control-sm"
+			class="form-control form-control-md"
 			list="datalistOptions"
 			id="exampleDataList"
 			placeholder="Existing jsons..."

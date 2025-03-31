@@ -5,7 +5,7 @@
 	export let isValid: boolean = true;
 
 	$: if (jsonInput) {
-		validateJson(jsonInput);
+			validateJson(jsonInput);
 	}
 
 	function validateJson(jsonString: string) {
@@ -19,10 +19,9 @@
 	}
 </script>
 
-<div>
+<div class="user-json-input-container">
 	<textarea
 		class="form-control"
-		rows="24"
 		bind:value={jsonInput}
 		placeholder="Paste a JSON string to validate..."
 	></textarea>
@@ -32,8 +31,18 @@
 </div>
 
 <style>
+	.user-json-input-container {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+	}
+
 	textarea {
+		flex-grow: 1;
 		font-size: 0.9rem;
 		font-family: 'PT Mono';
+		resize: none;
+		overflow: auto;
 	}
 </style>

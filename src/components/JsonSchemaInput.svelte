@@ -5,7 +5,7 @@
 	import { jsonSchemaStored, selectedSchema } from '$lib/store';
 
 	$: if (jsonSchema) {
-		validateJson(jsonSchema);
+			validateJson(jsonSchema);
 	}
 
 	$: if ($selectedSchema != undefined) {
@@ -24,10 +24,9 @@
 	}
 </script>
 
-<div>
+<div class="json-schema-input-container">
 	<textarea
 		class="form-control"
-		rows="24"
 		bind:value={jsonSchema}
 		placeholder="Paste the JSON schema here..."
 	></textarea>
@@ -37,8 +36,18 @@
 </div>
 
 <style>
+	.json-schema-input-container {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+	}
+
 	textarea {
+		flex-grow: 1;
 		font-size: 0.9rem;
 		font-family: 'PT Mono';
+		resize: none;
+		overflow: auto;
 	}
 </style>

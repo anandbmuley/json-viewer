@@ -45,7 +45,7 @@
 <!-- Button trigger modal -->
 <button
 	type="button"
-	class="btn btn-sm btn-dark"
+	class="btn btn-sm btn-dark" 
 	data-bs-toggle="modal"
 	data-bs-target="#exampleModal"
 	on:click={clearMessage}

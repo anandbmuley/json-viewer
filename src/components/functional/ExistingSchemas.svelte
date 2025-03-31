@@ -28,7 +28,7 @@
 
 <div>
 	<input
-		class="form-control form-control-sm"
+		class="form-control form-control-md"
 		list="schemaOptions"
 		id="exampleDataList"
 		placeholder="Existing schemas..."
@@ -43,10 +43,3 @@
 		{/if}
 	</datalist>
 </div>
-
-<style>
-	.autocomplete {
-		display: flex;
-		flex-direction: row;
-	}
-</style>

@@ -59,26 +59,26 @@
 	}
 </script>
 
-<div class="container mt-3">
+<div class="container-fluid vh-100 d-flex flex-column overflow-hidden">
 	<div class="row">
-		<div class="col-2">
+		<div class="col-12 col-md-2">
 			<h3>Validator</h3>
 		</div>
-		<div class="col-2">
+		<div class="col-12 col-md-2">
 			<ExistingSchemas />
 		</div>
 	</div>
-	<div class="row mb-3">
-		<div class="col-4">
+	<div class="row flex-grow-1 overflow-hidden">
+		<div class="col-12 col-md-4">
 			<JsonSchemaInput />
 		</div>
-		<div class="col-4">
+		<div class="col-12 col-md-4">
 			<UserJsonInput />
 		</div>
-		<div class="col-4">
+		<div class="col-12 col-md-4">
 			<h5>Validation result</h5>
 			{#if errors}
-				<ul>
+				<ul class="overflow-auto">
 					{#each errors as item}
 						<li>
 							<p class="validation-err">{item.message}</p>
@@ -89,16 +89,16 @@
 			{/if}
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-3">
+	<div class="row" style="height: 8%">
+		<div class="col-12 col-md-3">
 			<button on:click={clearSchemaInput} class="btn btn-sm btn-outline-dark">
 				<i class="bi bi-x-circle"></i><span class="ms-1">Reset</span>
 			</button>
 		</div>
-		<div class="col-4">
+		<div class="col-12 col-md-4">
 			<SaveJsonSchema jsonContent={$jsonSchemaStored} />
 		</div>
-		<div class="col-3">
+		<div class="col-12 col-md-3">
 			<button class="btn btn-sm btn-purple" on:click={validateJson}>
 				<i class="bi bi-check-circle-fill"></i>
 				<span class="ms-1">Validate</span>
@@ -111,6 +111,18 @@
 </div>
 
 <style>
+	.container-fluid {
+		padding: 1rem;
+	}
+
+	.row {
+		margin-bottom: 1rem;
+	}
+
+	.flex-grow-1 {
+			overflow: hidden;
+	}
+
 	.validation-err {
 		font-size: 1.2rem;
 		margin-bottom: -1%;
@@ -119,6 +131,7 @@
 	.validation-path {
 		font-size: 1rem;
 	}
+
 	.btn-purple {
 		background-color: #9000ff;
 		border-color: #9000ff;
