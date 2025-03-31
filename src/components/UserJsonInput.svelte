@@ -5,7 +5,13 @@
 	export let isValid: boolean = true;
 
 	$: if (jsonInput) {
+		try {
+			const parsed = JSON.parse(jsonInput);
+			jsonInput = JSON.stringify(parsed, null, 2);
 			validateJson(jsonInput);
+		} catch (err) {
+			isValid = false;
+		}
 	}
 
 	function validateJson(jsonString: string) {

@@ -23,6 +23,8 @@
 		} catch (err) {
 			message = 'Invalid JSON';
 		}
+	} else {
+		selectedSchema.set(''); // Clear the store when input is cleared
 	}
 </script>
 

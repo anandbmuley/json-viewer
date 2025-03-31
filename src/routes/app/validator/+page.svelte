@@ -27,8 +27,11 @@
 	};
 
 	let errorMessage: string = '';
+	let successMessage: string = '';
 
 	onMount(() => {
+		$jsonSchemaStored = ''; // Clear JSON schema on load
+		$jsonInputStored = ''; // Clear JSON input on load
 		console.log('Schema', JSON.stringify(schema));
 		console.log('Data', JSON.stringify(data));
 	});
@@ -40,6 +43,7 @@
 	function validateJson() {
 		try {
 			errorMessage = '';
+			successMessage = '';
 			if (!$jsonSchemaStored) {
 				errorMessage = 'Please provide a JSON schema';
 			} else if (!$jsonInputStored) {
@@ -47,7 +51,10 @@
 			} else {
 				const validate = ajv.compile(JSON.parse($jsonSchemaStored));
 				const valid = validate(JSON.parse($jsonInputStored));
-				if (!valid) {
+				if (valid) {
+					successMessage = 'Validation successful!';
+					errors = null;
+				} else {
 					console.log(validate.errors);
 					errors = validate.errors;
 				}
@@ -77,6 +84,9 @@
 		</div>
 		<div class="col-12 col-md-4">
 			<h5>Validation result</h5>
+			{#if successMessage}
+				<p class="text-success">{successMessage}</p>
+			{/if}
 			{#if errors}
 				<ul class="overflow-auto">
 					{#each errors as item}
@@ -136,5 +146,10 @@
 		background-color: #9000ff;
 		border-color: #9000ff;
 		color: white;
+	}
+
+	.text-success {
+		color: green;
+		font-size: 1.2rem;
 	}
 </style>

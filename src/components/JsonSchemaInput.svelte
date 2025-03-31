@@ -3,13 +3,24 @@
 	let jsonSchema: string = '';
 	let isValid: boolean = true;
 	import { jsonSchemaStored, selectedSchema } from '$lib/store';
+	import { onMount } from 'svelte';
+
+	
 
 	$: if (jsonSchema) {
-			validateJson(jsonSchema);
+		validateJson(jsonSchema);
 	}
 
 	$: if ($selectedSchema != undefined) {
 		jsonSchema = $selectedSchema;
+	}
+
+	$: if ($selectedSchema !== undefined && $selectedSchema !== jsonSchema) {
+		jsonSchema = $selectedSchema; // Update the local variable when the store changes
+	}
+
+	$: if ($selectedSchema === '') {
+		jsonSchema = ''; // Clear the local variable when the store is cleared
 	}
 
 	// This function validates if the input string is valid JSON
