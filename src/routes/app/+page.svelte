@@ -10,7 +10,7 @@
 
 	$: if (jsonData) {
 		try {
-			const parsed = JSON.parse(jsonData);
+			const parsed = JSON.parse(jsonData.trim()); // Trim here instead of reactively
 			jsonData = JSON.stringify(parsed, null, 2);
 		} catch (err) {
 			message = 'Invalid JSON';
@@ -18,10 +18,11 @@
 	}
 
 	$: if ($selectedJSON != undefined && $selectedJSON !== jsonData) {
-		jsonData = $selectedJSON;
+		// Update jsonData only if it is empty or matches the previous $selectedJSON
+		if (!jsonData || jsonData === $selectedJSON) {
+			jsonData = $selectedJSON;
+		}
 	}
-
-	$: jsonData = jsonData.trim();
 
 	const clearJsonContent = () => {
 		jsonData = '';

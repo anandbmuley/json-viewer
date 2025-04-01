@@ -11,12 +11,11 @@
 		validateJson(jsonSchema);
 	}
 
-	$: if ($selectedSchema != undefined) {
-		jsonSchema = $selectedSchema;
-	}
-
 	$: if ($selectedSchema !== undefined && $selectedSchema !== jsonSchema) {
-		jsonSchema = $selectedSchema; // Update the local variable when the store changes
+		// Update jsonSchema only if it is empty or matches the previous $selectedSchema
+		if (!jsonSchema || jsonSchema === $selectedSchema) {
+			jsonSchema = $selectedSchema;
+		}
 	}
 
 	$: if ($selectedSchema === '') {
