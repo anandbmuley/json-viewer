@@ -3,8 +3,6 @@
 	let jsonSchema: string = '';
 	let isValid: boolean = true;
 	import { jsonSchemaStored, selectedSchema } from '$lib/store';
-	import { onMount } from 'svelte';
-
 	
 
 	$: if (jsonSchema) {

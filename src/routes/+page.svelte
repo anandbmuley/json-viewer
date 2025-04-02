@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 </script>
 
-<div class="container page-center">
+<div data-bs-theme="dark" class="container page-center">
 	<h1 class="display-1">JSON Viewer</h1>
 	<h2>Introduction</h2>
 	<p>JSON viewer is helpful tool for working with JSON strings. Below are some of its features:</p>

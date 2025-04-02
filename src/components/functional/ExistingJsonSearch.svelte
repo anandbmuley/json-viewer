@@ -28,7 +28,7 @@
 	}
 </script>
 
-<div data-bs-theme="light">
+<div>
 	<div>
 		<input
 			class="form-control form-control-md"

@@ -1,7 +1,3 @@
-<script>
-	import ExistingJsonSearch from '../../components/functional/ExistingJsonSearch.svelte';
-</script>
-
 <nav class="navbar navbar-expand-lg">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="/">JSON Viewer</a>
@@ -30,8 +26,3 @@
 </nav>
 <slot />
 
-<style>
-	nav {
-		background-color: #dadada;
-	}
-</style>
