@@ -24,6 +24,7 @@
 			message = 'Invalid JSON';
 		}
 	} else {
+		jsonData = ''; // Clear jsonData when input is cleared
 		selectedSchema.set(''); // Clear the store when input is cleared
 	}
 </script>

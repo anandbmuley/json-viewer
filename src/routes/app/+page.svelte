@@ -4,6 +4,7 @@
 	import { selectedJSON } from '$lib/store';
 	import ExistingJsonSearch from '../../components/functional/ExistingJsonSearch.svelte';
 	import EvaluateJsonPath from '../../components/functional/EvaluateJsonPath.svelte';
+	import { onMount } from 'svelte';
 
 	let jsonData: string = '';
 	let message: string = '';
@@ -24,10 +25,20 @@
 		}
 	}
 
+	$: if ($selectedJSON === '') {
+		jsonData = ''; // Clear jsonData when the selectedJSON store is cleared
+	}
+
 	const clearJsonContent = () => {
 		jsonData = '';
+		message = ''; // Clear any error messages
 		selectedJSON.set(''); // Ensure the store is cleared
 	};
+
+	onMount(() => {
+		jsonData = ''; // Clear jsonData on page load
+		selectedJSON.set(''); // Clear the selectedJSON store on page load
+	});
 </script>
 
 <div class="container mt-3">

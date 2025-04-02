@@ -23,7 +23,7 @@
 			message = 'Invalid JSON';
 		}
 	} else {
-		jsonData = '';
+		jsonData = ''; // Clear jsonData when input is cleared
 		selectedJSON.set(''); // Ensure the store is cleared to reflect in the textarea
 	}
 </script>
