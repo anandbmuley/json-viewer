@@ -61,7 +61,7 @@
 			></textarea>
 			<div class="row mt-2">
 				<div class="col-6 col-md-10">
-					<button on:click={clearJsonContent} type="button" class="btn btn-sm btn-outline-dark">
+					<button on:click={clearJsonContent} type="button" class="btn btn-sm btn-secondary">
 						<i class="bi bi-x-circle ms-1"></i>
 						<span class="ms-1">Reset</span>
 					</button>
