@@ -45,7 +45,7 @@
 <!-- Button trigger modal -->
 <button
 	type="button"
-	class="btn btn-sm btn-dark" 
+	class="btn btn-sm btn-purple" 
 	data-bs-toggle="modal"
 	data-bs-target="#exampleModal"
 	on:click={clearMessage}
@@ -95,6 +95,9 @@
 </div>
 
 <style>
+    :root {
+        --bs-primary: #ff5733; /* Replace #ff5733 with your desired primary color */
+    }
 	.btn-purple {
 		background-color: #9000ff;
 		border-color: #9000ff;

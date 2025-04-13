@@ -101,7 +101,7 @@
 	</div>
 	<div class="row" style="height: 8%">
 		<div class="col-12 col-md-3">
-			<button on:click={clearSchemaInput} class="btn btn-sm btn-outline-dark">
+			<button on:click={clearSchemaInput} class="btn btn-sm btn-secondary">
 				<i class="bi bi-x-circle"></i><span class="ms-1">Reset</span>
 			</button>
 		</div>

@@ -4,13 +4,14 @@
 	import { selectedJSON } from '$lib/store';
 	import ExistingJsonSearch from '../../components/functional/ExistingJsonSearch.svelte';
 	import EvaluateJsonPath from '../../components/functional/EvaluateJsonPath.svelte';
+	import { onMount } from 'svelte';
 
 	let jsonData: string = '';
 	let message: string = '';
 
 	$: if (jsonData) {
 		try {
-			const parsed = JSON.parse(jsonData);
+			const parsed = JSON.parse(jsonData.trim()); // Trim here instead of reactively
 			jsonData = JSON.stringify(parsed, null, 2);
 		} catch (err) {
 			message = 'Invalid JSON';
@@ -18,15 +19,26 @@
 	}
 
 	$: if ($selectedJSON != undefined && $selectedJSON !== jsonData) {
-		jsonData = $selectedJSON;
+		// Update jsonData only if it is empty or matches the previous $selectedJSON
+		if (!jsonData || jsonData === $selectedJSON) {
+			jsonData = $selectedJSON;
+		}
 	}
 
-	$: jsonData = jsonData.trim();
+	$: if ($selectedJSON === '') {
+		jsonData = ''; // Clear jsonData when the selectedJSON store is cleared
+	}
 
 	const clearJsonContent = () => {
 		jsonData = '';
+		message = ''; // Clear any error messages
 		selectedJSON.set(''); // Ensure the store is cleared
 	};
+
+	onMount(() => {
+		jsonData = ''; // Clear jsonData on page load
+		selectedJSON.set(''); // Clear the selectedJSON store on page load
+	});
 </script>
 
 <div class="container mt-3">
@@ -49,7 +61,7 @@
 			></textarea>
 			<div class="row mt-2">
 				<div class="col-6 col-md-10">
-					<button on:click={clearJsonContent} type="button" class="btn btn-sm btn-outline-dark">
+					<button on:click={clearJsonContent} type="button" class="btn btn-sm btn-secondary">
 						<i class="bi bi-x-circle ms-1"></i>
 						<span class="ms-1">Reset</span>
 					</button>

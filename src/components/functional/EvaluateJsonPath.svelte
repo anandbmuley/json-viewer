@@ -47,7 +47,6 @@
 
 <style>
 	pre {
-		background-color: #f8f9fa;
 		padding: 10px;
 		border: 1px solid #dee2e6;
 		border-radius: 4px;
