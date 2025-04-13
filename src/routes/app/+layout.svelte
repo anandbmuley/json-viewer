@@ -41,6 +41,16 @@
 						<span>Validator</span>
 					</a>
 				</li>
+				<li class="nav-item text-center">
+					<a
+						class="nav-link menu-item"
+						href="/app/diff"
+						class:active={$currentPath === '/app/diff'}
+					>
+						<i class="bi bi-arrow-left-right"></i>
+						<span>JSON Diff</span>
+					</a>
+				</li>
 			</ul>
 		</div>
 	</div>

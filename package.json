@@ -39,6 +39,7 @@
 	"type": "module",
 	"dependencies": {
 		"ajv": "^6.12.6",
-		"dexie": "^4.0.4"
+		"dexie": "^4.0.4",
+		"json-diff-ts": "^4.2.1"
 	}
 }
