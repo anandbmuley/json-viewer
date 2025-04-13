@@ -1,23 +1,35 @@
 <script lang="ts">
 	import { diff } from 'json-diff-ts';
 
-	let json1 = '';
-	let json2 = '';
-	let diffResult: any[] = []; // Use the locally defined IChange type
+	let expectedJson = '';
+	let actualJson = ''; 
+	let diffResult: any[] = [];
+	let noDifferences = false;
+	let hasError = false;
+	let showResultCount = false;
 
 	function calculateDiff() {
 		try {
-			const obj1 = JSON.parse(json1);
-			const obj2 = JSON.parse(json2);
+			const obj1 = JSON.parse(expectedJson); 
+			const obj2 = JSON.parse(actualJson); 
 			const result = diff(obj1, obj2);
 
-			if (result) {
+			if (result && result.length > 0) {
 				diffResult = result;
+				noDifferences = false;
+				hasError = false;
+				showResultCount = true;
 			} else {
-				diffResult = [{ type: 'INFO', key: '', value: 'No differences found', oldValue: undefined }];
+				noDifferences = true;
+				hasError = false;
+				diffResult = [];
+				showResultCount = false;
 			}
 		} catch (error) {
-			diffResult = [{ type: 'ERROR', key: '', value: 'Invalid JSON input', oldValue: undefined }];
+			noDifferences = false;
+			hasError = true;
+			diffResult = [];
+			showResultCount = false;
 		}
 	}
 </script>
@@ -29,7 +41,7 @@
 			<h4>Expected</h4>
 			<textarea
 				class="form-control"
-				bind:value={json1}
+				bind:value={expectedJson}
 				placeholder="Paste the first JSON here..."
 			></textarea>
 		</div>
@@ -37,7 +49,7 @@
 			<h4>Actual</h4>
 			<textarea
 				class="form-control"
-				bind:value={json2}
+				bind:value={actualJson}
 				placeholder="Paste the second JSON here..."
 			></textarea>
 		</div>
@@ -49,34 +61,47 @@
 	</div>
 	<div class="row mt-3">
 		<div class="col-12">
-			<h4>Result</h4>
-			<table class="table table-bordered">
-				<thead>
-					<tr>
-						<th>Sr.No</th>
-						<th>Type</th>
-						<th>Field</th>
-						<th>Expected</th>
-						<th>Actual</th>
-					</tr>
-				</thead>
-				<tbody>
-					{#each diffResult as { type, key, value, oldValue }, index}
+			{#if hasError}
+				<div class="alert alert-danger text-center">Invalid JSON input</div>
+			{:else if noDifferences}
+				<div class="alert alert-info text-center">No differences found</div>
+			{:else}
+				<h4>Result</h4>
+				{#if showResultCount}
+					<small class="text-purple">Number of differences found: {diffResult.length} (Please scroll the table body to see more)</small>
+				{/if}
+				<table class="table table-bordered">
+					<thead>
 						<tr>
-							<td>{index + 1}</td>
-							<td>{type}</td>
-							<td>{key}</td>
-							<td>{oldValue !== undefined ? oldValue : '-'}</td>
-							<td>{value !== undefined ? value : '-'}</td>
+							<th>Sr.No</th>
+							<th>Type</th>
+							<th>Field</th>
+							<th>Expected</th>
+							<th>Actual</th>
 						</tr>
-					{/each}
-				</tbody>
-			</table>
+					</thead>
+					<tbody class="scrollable-tbody">
+						{#each diffResult as { type, key, value, oldValue }, index}
+							<tr>
+								<td>{index + 1}</td>
+								<td>{type}</td>
+								<td>{key}</td>
+								<td>{oldValue !== undefined ? oldValue : '-'}</td>
+								<td>{value !== undefined ? value : '-'}</td>
+							</tr>
+						{/each}
+					</tbody>
+				</table>
+			{/if}
 		</div>
 	</div>
 </div>
 
 <style>
+	.text-purple {
+		color: #9000ff;
+	}
+
 	.full-screen {
 		width: 100vw;
 		height: 100vh;
@@ -108,5 +133,34 @@
 	}
 	th {
 		background-color: #f2f2f2;
+	}
+	.alert {
+		padding: 15px;
+		background-color: #e7f3fe;
+		border: 1px solid #b3d8fd;
+		border-radius: 4px;
+		color: #31708f;
+	}
+	.alert-danger {
+		padding: 15px;
+		background-color: #f8d7da;
+		border: 1px solid #f5c6cb;
+		border-radius: 4px;
+		color: #721c24;
+	}
+	.scrollable-tbody {
+		display: block;
+		max-height: 300px; /* Approximately 5 rows assuming 40px per row */
+		overflow-y: auto;
+	}
+	.scrollable-tbody tr {
+		display: table;
+		width: 100%;
+		table-layout: fixed;
+	}
+	thead, .scrollable-tbody tr {
+		display: table;
+		width: 100%;
+		table-layout: fixed;
 	}
 </style>
