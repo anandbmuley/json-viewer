@@ -68,11 +68,18 @@
         output = ''; // Clear the old AI response
         isThinking = true; // Set thinking state to true
         const messages: webllm.ChatCompletionMessageParam[] = [
-          { role: 'system', content: 'You are a helpful assistant for JSON-related queries.' },
+          {
+            role: 'system',
+            content: `You are a helpful assistant for JSON-related queries. 
+            Respond in a single word or sentence only.
+            Do not return a JSON object or string in your response.
+            `,
+          },
           { role: 'user', content: `JSON: ${jsonInput}\nQuery: ${queryInput}` },
         ];
         const reply = await engine.chat.completions.create({ messages });
-        output = reply.choices[0].message.content || '';
+        const rawOutput = reply.choices[0].message.content || '';
+        output = rawOutput; // Format the output
         queryInput = ''; // Clear the user query input field
         errorMessage = ''; // Clear any previous error messages
       } catch (error) {
@@ -147,7 +154,7 @@
           {#if isThinking}
             <p><strong>AI response:</strong> <em>Thinking...</em></p>
           {:else}
-            <p><strong>AI response:</strong> {output}</p>
+            <p><strong>AI response:</strong> {@html output} <!-- Render the formatted output as HTML --></p>
           {/if}
         </div>
       {/if}
@@ -162,7 +169,7 @@
     resize: none;
     width: 100%;
   }
-  .output {
+  .formatted-json {
     font-size: 0.9rem;
     font-family: 'PT Mono';
     background-color: #f8f9fa;
