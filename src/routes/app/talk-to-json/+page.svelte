@@ -105,11 +105,11 @@
 <div class="container mt-3">
   <div class="row" style="height: calc(100vh - 100px);">
     <div class="col-md-6 d-flex flex-column">
-      <h3>Paste JSON</h3>
+      <h3>JSON</h3>
       <textarea
         class="form-control flex-grow-1"
         bind:value={jsonInput}
-        placeholder="Paste your JSON here"
+        placeholder="Paste your JSON here to talk about or extract information from that using AI..."
       ></textarea>
     </div>
     <div class="col-md-6 d-flex flex-column">
