@@ -62,7 +62,17 @@
   };
 
   async function handleTalk(): Promise<void> {
-    if (engine && queryInput) {
+    if (!jsonInput.trim()) {
+      errorMessage = 'Please enter some JSON to discuss.';
+      return;
+    }
+
+    if (!queryInput.trim()) {
+      errorMessage = 'Please enter a query to ask about the JSON.';
+      return;
+    }
+
+    if (engine) {
       try {
         userQuery = queryInput; // Store the user query
         output = ''; // Clear the old AI response
