@@ -3,18 +3,18 @@
   import * as webllm from "https://esm.run/@mlc-ai/web-llm";
 
   let engine: webllm.MLCEngine | null = null;
-  let jsonInput = '';
-  let queryInput = '';
-  let output = '';
-  let errorMessage = '';
-  let isModelAvailable = false;
-  let downloadStatus = '';
-  let progress = 0; // Progress percentage
-  const selectedModel = 'Phi-3-mini-4k-instruct-q4f16_1-MLC';
-  let userQuery = ''; // To store the user query for display
-  let isThinking = false; // To indicate if the AI is processing the query
+  let jsonInput: string = '';
+  let queryInput: string = '';
+  let output: string = '';
+  let errorMessage: string = '';
+  let isModelAvailable: boolean = false;
+  let downloadStatus: string = '';
+  let progress: number = 0; // Progress percentage
+  const selectedModel: string = 'Phi-3-mini-4k-instruct-q4f16_1-MLC';
+  let userQuery: string = ''; // To store the user query for display
+  let isThinking: boolean = false; // To indicate if the AI is processing the query
 
-  const clearContent = () => {
+  const clearContent = (): void => {
     jsonInput = '';
     queryInput = '';
     output = '';
@@ -23,12 +23,12 @@
     userQuery = '';
   };
 
-  const updateProgress = (report: { progress: number; text: string }) => {
+  const updateProgress = (report: { progress: number; text: string }): void => {
     progress = Math.round(report.progress * 100); // Convert to percentage
     downloadStatus = report.text;
   };
 
-  const initializeWebLLMEngine = async () => {
+  const initializeWebLLMEngine = async (): Promise<void> => {
     try {
       downloadStatus = 'Initializing model...';
       progress = 0;
@@ -39,29 +39,29 @@
         downloadStatus = 'Model initialized successfully.';
         progress = 0; // Reset progress after successful initialization
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error initializing model:', error);
-      errorMessage = 'Failed to initialize the model. Please try downloading it.';
+      errorMessage = error.message || 'Failed to initialize the model. Please try downloading it.';
       downloadStatus = '';
       progress = 0;
       isModelAvailable = false; // Ensure this is reset on failure
     }
   };
 
-  const downloadModel = async () => {
+  const downloadModel = async (): Promise<void> => {
     try {
       downloadStatus = 'Downloading model...';
       progress = 0;
       await initializeWebLLMEngine();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error downloading the model:', error);
-      errorMessage = 'Failed to download the model. Please try again.';
+      errorMessage = error.message || 'Failed to download the model. Please try again.';
       downloadStatus = '';
       progress = 0;
     }
   };
 
-  async function handleTalk() {
+  async function handleTalk(): Promise<void> {
     if (engine && queryInput) {
       try {
         userQuery = queryInput; // Store the user query
@@ -72,16 +72,16 @@
             role: 'system',
             content: `You are a helpful assistant for JSON-related queries. 
             Respond in a single word or sentence only. 
-            Undestand the JSON structure and provide relevant information based on the user's query.            `,
+            Understand the JSON structure and provide relevant information based on the user's query.`,
           },
           { role: 'user', content: `JSON: ${jsonInput}\nQuery: ${queryInput}` },
         ];
         const reply = await engine.chat.completions.create({ messages });
-        const rawOutput = reply.choices[0].message.content || '';
+        const rawOutput = reply.choices[0]?.message?.content || '';
         output = rawOutput; // Format the output
         queryInput = ''; // Clear the user query input field
         errorMessage = ''; // Clear any previous error messages
-      } catch (error) {
+      } catch (error: any) {
         console.error('Error during chat completion:', error);
         errorMessage = error.message || 'An error occurred while processing your query.';
       } finally {
@@ -90,11 +90,11 @@
     }
   }
 
-  onMount(async () => {
+  onMount(async (): Promise<void> => {
     try {
       engine = new webllm.MLCEngine();
       await initializeWebLLMEngine(); // Attempt to initialize the model on component load
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error initializing WebLLM:', error);
       errorMessage = 'Failed to initialize the engine.';
     }
