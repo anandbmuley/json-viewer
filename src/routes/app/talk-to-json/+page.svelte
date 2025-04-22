@@ -71,9 +71,8 @@
           {
             role: 'system',
             content: `You are a helpful assistant for JSON-related queries. 
-            Respond in a single word or sentence only.
-            Do not return a JSON object or string in your response.
-            `,
+            Respond in a single word or sentence only. 
+            Undestand the JSON structure and provide relevant information based on the user's query.            `,
           },
           { role: 'user', content: `JSON: ${jsonInput}\nQuery: ${queryInput}` },
         ];
@@ -114,6 +113,10 @@
     </div>
     <div class="col-md-6 d-flex flex-column">
       <h3>Enter Query</h3>
+      <div class="mb-3 alert alert-info">
+        <p><strong>Current Model:</strong> {selectedModel}</p>
+        <p><strong>Status:</strong> {downloadStatus || 'Not initialized'}</p>
+      </div>
       <textarea
         class="form-control mb-3"
         bind:value={queryInput}
@@ -128,22 +131,19 @@
           <button on:click={downloadModel} class="btn btn-warning btn-sm ms-2">Download & Initialize Model</button>
         {/if}
       </div>
-      {#if downloadStatus}
-        <div class="alert alert-info" role="alert">{downloadStatus}</div>
-        {#if progress > 0}
-          <div class="progress">
-            <div
-              class="progress-bar"
-              role="progressbar"
-              style="width: {progress}%"
-              aria-valuenow={progress}
-              aria-valuemin="0"
-              aria-valuemax="100"
-            >
-              {progress}%
-            </div>
+      {#if progress > 0}
+        <div class="progress">
+          <div
+            class="progress-bar"
+            role="progressbar"
+            style="width: {progress}%"
+            aria-valuenow={progress}
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            {progress}%
           </div>
-        {/if}
+        </div>
       {/if}
       {#if errorMessage}
         <div class="alert alert-danger" role="alert">{errorMessage}</div>
