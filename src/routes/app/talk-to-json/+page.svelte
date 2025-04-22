@@ -13,6 +13,7 @@
   const selectedModel: string = 'Phi-3-mini-4k-instruct-q4f16_1-MLC';
   let userQuery: string = ''; // To store the user query for display
   let isThinking: boolean = false; // To indicate if the AI is processing the query
+  let showModal: boolean = true; // State to control the modal visibility
 
   const clearContent = (): void => {
     jsonInput = '';
@@ -45,6 +46,23 @@
       downloadStatus = '';
       progress = 0;
       isModelAvailable = false; // Ensure this is reset on failure
+    }
+  };
+
+  const closeModal = async (): Promise<void> => {
+    showModal = false;
+    await initializeWebLLMEngine(); // Initialize the model only after the modal is closed
+  };
+
+  const formatJSON = (): void => {
+    try {
+      if (jsonInput.trim()) {
+        const parsedJSON = JSON.parse(jsonInput); // Parse the JSON to validate it
+        jsonInput = JSON.stringify(parsedJSON, null, 2); // Pretty format the JSON
+        errorMessage = ''; // Clear any previous error messages
+      }
+    } catch (error) {
+      errorMessage = 'Invalid JSON format. Please correct it.';
     }
   };
 
@@ -103,7 +121,6 @@
   onMount(async (): Promise<void> => {
     try {
       engine = new webllm.MLCEngine();
-      await initializeWebLLMEngine(); // Attempt to initialize the model on component load
     } catch (error: any) {
       console.error('Error initializing WebLLM:', error);
       errorMessage = 'Failed to initialize the engine.';
@@ -112,6 +129,48 @@
 </script>
 
 <div class="container mt-3">
+  {#if showModal}
+    <div class="modal show d-block" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Important Information</h5>
+      
+            <button type="button" class="btn-close" aria-label="Close" on:click={closeModal}></button>
+          </div>
+          
+          <div class="modal-body">
+            <p>
+              <strong>Please read the following details carefully</strong>
+            </p>
+            <p>
+              The <strong>{selectedModel}</strong> is a lightweight AI model. 
+              It requires approximately <strong>4GB of RAM</strong> with GPU acceleration for optimal performance. 
+              The model has been tested on a <strong>Mac M4 with 16GB RAM</strong>.
+            </p>
+            <p>
+              Below are the key informations about the model:
+            </p>
+            <ul>
+              <li><strong>Model Name:</strong> Phi-3 Mini Instruct</li>
+              <li><strong>Parameters:</strong> 3.8B</li>
+              <li><strong>Architecture:</strong> Transformer</li>
+              <li><strong>Token Limit:</strong> 4096</li>
+              <li><strong>Quantization:</strong> 4-bit quantization format with 16-bit floating-point weights, balancing reduced memory usage with maintained performance</li>
+            </ul>
+            <p>
+              Please ensure your system meets the minimum requirements before running this application. 
+              Running the model on systems with insufficient resources may lead to performance issues.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" on:click={closeModal}>Got it</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  {/if}
+
   <div class="row" style="height: calc(100vh - 100px);">
     <div class="col-md-6 d-flex flex-column">
       <h3>JSON</h3>
@@ -119,6 +178,7 @@
         class="form-control flex-grow-1"
         bind:value={jsonInput}
         placeholder="Paste your JSON here to talk about or extract information from that using AI..."
+        on:input={formatJSON}
       ></textarea>
     </div>
     <div class="col-md-6 d-flex flex-column">
@@ -203,5 +263,11 @@
   }
   .container {
     max-width: 100%;
+  }
+  .modal {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .modal-content {
+    font-size: 0.9rem;
   }
 </style>
