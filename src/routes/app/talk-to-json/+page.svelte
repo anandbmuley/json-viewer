@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import * as webllm from "https://esm.run/@mlc-ai/web-llm";
+  import * as webllm from "@mlc-ai/web-llm";
 
   let engine: webllm.MLCEngine | null = null;
   let jsonInput: string = '';
