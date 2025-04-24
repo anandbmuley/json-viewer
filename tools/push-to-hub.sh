@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define variables
-IMAGE_NAME="anandbmuley/json-viewer:1.3.0"
+IMAGE_NAME="anandbmuley/json-viewer:1.4.0"
 IMAGE_NAME_LATEST="anandbmuley/json-viewer:latest"
 DOCKERFILE_PATH="."
 

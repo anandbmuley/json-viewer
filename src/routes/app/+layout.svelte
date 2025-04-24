@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { derived } from 'svelte/store';
+	import { goto } from '$app/navigation';
 
 	const currentPath = derived(page, ($page) => $page.url.pathname);
 </script>
@@ -49,6 +50,16 @@
 					>
 						<i class="bi bi-arrow-left-right"></i>
 						<span>JSON Diff</span>
+					</a>
+				</li>
+				<li class="nav-item text-center">
+					<a
+						class="nav-link menu-item"
+						href="/app/talk-to-json"
+						class:active={$currentPath === '/app/talk-to-json'}
+					>
+						<i class="bi bi-chat-dots"></i>
+						<span>Talk to JSON</span>
 					</a>
 				</li>
 			</ul>

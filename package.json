@@ -38,6 +38,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@mlc-ai/web-llm": "^0.2.78",
 		"ajv": "^6.12.6",
 		"dexie": "^4.0.4",
 		"json-diff-ts": "^4.2.1"

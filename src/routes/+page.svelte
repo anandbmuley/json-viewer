@@ -12,6 +12,7 @@
 		<li><b>Schema Validation:</b> Validate JSON against schemas and save schemas for reuse.</li>
 		<li><b>JSON Path Evaluation:</b> Query the JSON tree using JSON Path expressions.</li>
 		<li><b>Diff Tool:</b> Compare two JSON objects and highlight differences.</li>
+		<li><b>Talk to JSON:</b> Interact with JSON data using lightweight AI model Phi-3</li>
 	</ul>
 	<a class="btn btn-lg btn-purple" href="/app">GET STARTED</a>
 </div>
